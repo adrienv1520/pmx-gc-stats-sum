@@ -62,14 +62,16 @@ module.exports = function(options) {
 	gc.on('stats', function (stats) {
 		if (stats) {
 			probes = probesByType[stats.gctype];
-			probes.count.update(1);
-			probes.pause.update(stats.pause);
-			if (stats.diff)
-				for (var key in probes.diff) {
-					var val = stats.diff[key]
-					if (typeof val != 'undefined')
-						probes.diff[key].update(val);
-				}
+			if (probes) {
+				probes.count.update(1);
+				probes.pause.update(stats.pause);
+				if (stats.diff)
+					for (var key in probes.diff) {
+						var val = stats.diff[key]
+						if (typeof val != 'undefined')
+							probes.diff[key].update(val);
+					}
+			}
 		}
 	});
 };
