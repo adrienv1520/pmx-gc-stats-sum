@@ -6,17 +6,15 @@ gc stats sums by gc type through pm2 by pmx
 Test
 ----
 
-~~
 npm i pm2 -g
 npm install
 pm2 start -i max example.js
 pm2 monit
-~~
 
 Usage
 -----
 
-~~
+```javascript
 require('pmx-gc-stats-sum')()
 or
 require('pmx-gc-stats-sum')(
@@ -28,4 +26,4 @@ require('pmx-gc-stats-sum')(
 		]
 	}
 )
-~~
+```
