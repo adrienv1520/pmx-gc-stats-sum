@@ -1,0 +1,26 @@
+{
+  "name": "pmx-gc-stats-sum",
+  "version": "0.9.0",
+  "description": "gc stats sums by gc type through pm2/pmx",
+  "main": "index.js",
+  "scripts": {
+    "test": "pm2 kill && pm2 start -i max example.js && pm2 monit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gleaute/pmx-gc-stats-sum.git"
+  },
+  "author": "Gaël LEAUTE <leaute_gael@hotmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gleaute/pmx-gc-stats-sum/issues"
+  },
+  "homepage": "https://github.com/gleaute/pmx-gc-stats-sum#readme",
+  "devDependencies": {
+    "express": "^4.16.3"
+  },
+  "dependencies": {
+    "pmx": "^1.6.4",
+    "gc-stats": "^1.1.1"
+  }
+}
