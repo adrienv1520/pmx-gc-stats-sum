@@ -1,7 +1,7 @@
 pmx-gc-stats-sum
 ================
 
-gc stats sums by gc type through pm2 by pmx
+gc stats sums by gc type through pm2/pmx
 
 Test
 ----
@@ -26,4 +26,5 @@ require('pmx-gc-stats-sum')(
 		]
 	}
 )
+// your app here
 ```
