@@ -1,7 +1,7 @@
 pmx-gc-stats-sum
 ================
 
-gc stats sums by gc type through pm2/pmx
+[gc-stats](https://github.com/dainis/node-gcstats) stats summarized by gc type through pm2/pmx
 
 Test
 ----
