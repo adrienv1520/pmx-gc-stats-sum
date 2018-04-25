@@ -1,12 +1,7 @@
 
 require('./index')(
-/*	{ 
-		gcTypes: [1, 2],
-		gcDiffProps: [
-			"totalHeapExecutableSize",
-			"usedHeapSize",
-		]
-	}*/
+	//[1, 2],
+	//["totalHeapExecutableSize", "usedHeapSize"]
 )
 
 const express = require('express')

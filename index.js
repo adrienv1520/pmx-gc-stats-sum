@@ -1,10 +1,14 @@
-var probe = require('pmx').probe();
-var gc = (require('gc-stats'))();
+'use strict';
 
-module.exports = function(options) {
+/**
+ * Summarized gc-stats stats and expose them in pm2
+ * @param {string[]} gcTypes - gc types concerned
+ * @param {string[]} gcDiffProps - gc diff properties concerned
+ */
+module.exports = function(gcTypes, gcDiffProps) {
 
-	if (!options)
-		options = {};
+	var probe = require('pmx').probe();
+	var gc = (require('gc-stats'))();
 
 	var dfltGcDiffProps = [
 		"totalHeapSize",
@@ -40,9 +44,9 @@ module.exports = function(options) {
 	var probesByType = {};
 	for (var i = 0; i < dfltGcTypes.length; i++) {
 		var gcType = dfltGcTypes[i];
-		if (typeof options.gcTypes != 'undefined' && 
-			options.gcTypes instanceof Array && 
-			options.gcTypes.indexOf(gcType) == -1)
+		if (typeof gcTypes != 'undefined' && 
+			gcTypes instanceof Array && 
+			gcTypes.indexOf(gcType) == -1)
 	  		continue; // exclude this gcType
 	  	probesByType[gcType] = { 
 	  		count: probeSumFn(dfltProbeNameFn, gcType, "", ""), 
@@ -51,9 +55,9 @@ module.exports = function(options) {
 	  	};
 		for (var j = 0; j < dfltGcDiffProps.length; j++) {
 			var gcDiffProp = dfltGcDiffProps[j];
-			if (typeof options.gcDiffProps != 'undefined' && 
-				options.gcDiffProps instanceof Array && 
-				options.gcDiffProps.indexOf(gcDiffProp) == -1)
+			if (typeof gcDiffProps != 'undefined' && 
+				gcDiffProps instanceof Array && 
+				gcDiffProps.indexOf(gcDiffProp) == -1)
 				continue; // exclude this gcDiffProp 
 			probesByType[gcType].diff[gcDiffProp] = probeSumFn(dfltProbeNameFn, gcType, "Diff" + gcDiffProp.replace(/^./, function(s){ return s.toUpperCase(); }), "B");
 		}
@@ -61,7 +65,7 @@ module.exports = function(options) {
 
 	gc.on('stats', function (stats) {
 		if (stats) {
-			probes = probesByType[stats.gctype];
+			var probes = probesByType[stats.gctype];
 			if (probes) {
 				probes.count.update(1);
 				probes.pause.update(stats.pause);
